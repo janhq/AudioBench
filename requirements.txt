@@ -14,3 +14,4 @@ distro
 vector_quantize_pytorch
 webdataset
 git+https://github.com/homebrewltd/WhisperSpeech.git
+openai
