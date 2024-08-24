@@ -1,18 +1,31 @@
-export AZURE_OPENAI_KEY="7e703cc81fc8436dbe5045e5bb81b5f0"
+export AZURE_OPENAI_KEY=""
+export OPENAI_API_KEY=""
 
 # =  =  =  =  =  =  =  =  =  =  =  =  =  =  =
-MODEL_NAME=llama3.1-s-whisperspeech
+MODEL_PATH_OR_ID="/home/root/BachVD/model_zoo/llama3.1-s-instruct-2024-08-19-epoch-3/"
 BATCH_SIZE=1
-OVERWRITE=True
+OVERWRITE=False
 NUMBER_OF_SAMPLES=-1
 # =  =  =  =  =  =  =  =  =  =  =  =  =  =  =
-export CUDA_VISIBLE_DEVICES=0,1,2,3
+export CUDA_VISIBLE_DEVICES=0
 # SI
 DATASET=openhermes_audio_test
 METRICS=gpt4_judge
-bash eval.sh $DATASET $MODEL_NAME $BATCH_SIZE $OVERWRITE $METRICS $NUMBER_OF_SAMPLES
+python src/main_evaluate.py \
+    --dataset_name $DATASET \
+    --model_path_or_id $MODEL_PATH_OR_ID \
+    --batch_size $BATCH_SIZE \
+    --overwrite $OVERWRITE \
+    --metrics $METRICS \
+    --number_of_samples $NUMBER_OF_SAMPLES
 
-# DATASET=alpaca_audio_test
-# METRICS=gpt4_judge
-# bash eval.sh $DATASET $MODEL_NAME $GPU $BATCH_SIZE $OVERWRITE $METRICS $NUMBER_OF_SAMPLES
+DATASET=alpaca_audio_test
+METRICS=gpt4_judge
+python src/main_evaluate.py \
+    --dataset_name $DATASET \
+    --model_path_or_id $MODEL_PATH_OR_ID \
+    --batch_size $BATCH_SIZE \
+    --overwrite $OVERWRITE \
+    --metrics $METRICS \
+    --number_of_samples $NUMBER_OF_SAMPLES
 
