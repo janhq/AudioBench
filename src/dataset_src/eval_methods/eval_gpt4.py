@@ -21,17 +21,21 @@ import transformers
 from tqdm import tqdm
 
 import openai
+from openai import OpenAI
 from openai import AzureOpenAI
-
+# print(os.getenv("AZURE_OPENAI_KEY"))
 
 def gpt4_as_judge(model_path, input_data):
     """ Compute the score of the model on the given data."""
 
     client = AzureOpenAI(
-        azure_endpoint = 'https://janchatgpt.openai.azure.com', 
+        azure_endpoint = 'https://janchatgpt.openai.azure.com/', 
         api_key=os.getenv("AZURE_OPENAI_KEY"),  
         api_version="2024-02-15-preview"
         )
+    # client = OpenAI(
+    #     api_key=os.getenv("OPENAI_API_KEY")
+    # )
 
     # generation
     all_details = []
@@ -71,7 +75,7 @@ def gpt4_as_judge(model_path, input_data):
 
         try:
             completion = client.chat.completions.create(
-                model="gpt4-turbo-0409",
+                model="alan-gpt4",
                 messages = messages,
                 temperature=0.7,
                 max_tokens=500,

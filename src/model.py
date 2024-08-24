@@ -47,7 +47,7 @@ class Model(object):
 
         if self.model_name == "whisper_large_v3_with_llama_3_8b_instruct": whisper_large_v3_with_llama_3_8b_instruct_model_loader(self)
         # elif self.model_name == "salmonn_7b": salmonn_7b_model_loader(self)
-        elif self.model_name == "llama3.1-s-whisperspeech": llama3_1_s_model_loader(self)
+        elif "llama3.1-s" in self.model_name.lower(): llama3_1_s_model_loader(self)
 
         
         else:
@@ -59,7 +59,7 @@ class Model(object):
         with torch.no_grad():
             if self.model_name == "whisper_large_v3_with_llama_3_8b_instruct": return whisper_large_v3_with_llama_3_8b_instruct_model_generation(self, input)
             # elif self.model_name == "salmonn_7b": return salmonn_7b_model_generation(self, input)
-            elif self.model_name == "llama3.1-s-whisperspeech": return llama3_1_s_model_generation(self, input)
+            elif "llama3.1-s" in self.model_name.lower(): return llama3_1_s_model_generation(self, input)
             
             else:
                 raise NotImplementedError("Model {} not implemented yet".format(self.model_name))
