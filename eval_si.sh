@@ -4,7 +4,7 @@ DATASET1=openhermes_audio_test
 DATASET2=alpaca_audio_test
 METRICS=gpt4_judge
 OVERWRITE=True
-NUMBER_OF_SAMPLES=1
+NUMBER_OF_SAMPLES=-1
 
 
 

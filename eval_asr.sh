@@ -3,7 +3,7 @@ BATCH_SIZE=1
 OVERWRITE=True
 METRICS=wer
 DATASET=librispeech_test_clean
-NUMBER_OF_SAMPLES=1
+NUMBER_OF_SAMPLES=-1
 
 if [ ! -d "eval_audio" ]; then
     python3 -m venv eval_audio
