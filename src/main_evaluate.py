@@ -62,7 +62,14 @@ def main(
         raise NotImplementedError("Batch size {} not implemented yet".format(batch_size))
 
     dataset = Dataset(dataset_name, number_of_samples)
-    model_name = model_path_or_id.split('/')[-1]    
+    # example model_path_or_id: "/home/root/BachVD/model_zoo/llama3.1-s-instruct-2024-08-19-epoch-3/" 
+    if os.path.exists(model_path_or_id):
+        if model_path_or_id.endswith('/'):
+            model_path_or_id = model_path_or_id[:-1]
+        model_name = os.path.basename(model_path_or_id)
+        logger.info("Found model path: {}".format(model_path_or_id))
+    else:
+        model_name = model_path_or_id.split('/')[-1]
     if overwrite or not os.path.exists('log/{}/{}.json'.format(model_name, dataset_name)):
         logger.info("Overwrite is enabled or the results are not found. Try to infer with the model: {}.".format(model_name))
     
