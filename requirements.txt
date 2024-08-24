@@ -11,6 +11,7 @@ transformers
 distro
 vector_quantize_pytorch
 webdataset
+librosa
 soundfile
 git+https://github.com/homebrewltd/WhisperSpeech.git
 --extra-index-url https://download.pytorch.org/whl/cu121
