@@ -57,7 +57,7 @@ def llama3_1_s_model_loader(self):
             local_dir=".",
         )
     self.vq_model = RQBottleneckTransformer.load_model(
-        "/home/root/BachVD/research/AudioBench/whisper-vq-stoks-medium-en+pl-fixed.model"
+        "whisper-vq-stoks-medium-en+pl-fixed.model"
     ).to(self.device)
     self.vq_model.ensure_whisper(self.device)
 
