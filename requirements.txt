@@ -16,3 +16,4 @@ torch==2.2.0
 torchaudio==2.2.0
 vllm
 openai
+huggingface_hub

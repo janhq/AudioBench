@@ -16,6 +16,8 @@
 import sys
 sys.path.append('.')
 sys.path.append('../')
+import os
+from huggingface_hub import hf_hub_download
 import logging
 import numpy as np
 import torch
@@ -48,7 +50,12 @@ def audio_to_sound_tokens(vq_model, audio, target_bandwidth=1.5, device="cuda"):
     result = ''.join(f'<|sound_{num:04d}|>' for num in codes)
     return f'<|sound_start|>{result}<|sound_end|>'
 def llama3_1_s_model_loader(self):
-
+    if not os.path.exists("whisper-vq-stoks-medium-en+pl-fixed.model"):
+        hf_hub_download(
+            repo_id="jan-hq/WhisperVQ",
+            filename="whisper-vq-stoks-medium-en+pl-fixed.model",
+            local_dir=".",
+        )
     self.vq_model = RQBottleneckTransformer.load_model(
         "/home/root/BachVD/research/AudioBench/whisper-vq-stoks-medium-en+pl-fixed.model"
     ).to(self.device)
