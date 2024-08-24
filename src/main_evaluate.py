@@ -41,7 +41,7 @@ def do_model_prediction(input_data, model, batch_size):
 
 def main(
         dataset_name      : str  = None,
-        model_name        : str  = None,
+        model_path_or_id        : str  = None,
         batch_size        : int  = 1,     # it is now a dummy parameter
         overwrite         : bool = False,
         metrics           : str  = None,
@@ -50,7 +50,7 @@ def main(
 
     logger.info("= = "*20)
     logger.info("Dataset name: {}".format(dataset_name))
-    logger.info("Model name: {}".format(model_name))
+    logger.info("Model name: {}".format(model_path_or_id))
     logger.info("Batch size: {}".format(batch_size))
     logger.info("Overwrite: {}".format(overwrite))
     logger.info("Metrics: {}".format(metrics))
@@ -62,13 +62,12 @@ def main(
         raise NotImplementedError("Batch size {} not implemented yet".format(batch_size))
 
     dataset = Dataset(dataset_name, number_of_samples)
-
+    model_name = model_path_or_id.split('/')[-1]    
     if overwrite or not os.path.exists('log/{}/{}.json'.format(model_name, dataset_name)):
         logger.info("Overwrite is enabled or the results are not found. Try to infer with the model: {}.".format(model_name))
     
         # Load model
-        model = Model(model_name)
-
+        model = Model(model_path_or_id)
         # Infer with model
         model_predictions           = do_model_prediction(dataset.input_data, model, batch_size=batch_size)
         data_with_model_predictions = dataset.dataset_processor.format_model_predictions(dataset.input_data, model_predictions)

@@ -32,7 +32,7 @@ logging.basicConfig(
 )
 # =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =
 
-llama_model_path = "/home/root/BachVD/model_zoo/llama3.1-s-instruct-2024-08-19-epoch-3/"
+# llama_model_path = "/home/root/BachVD/model_zoo/llama3.1-s-instruct-2024-08-19-epoch-3/"
 
 def audio_to_sound_tokens(vq_model, audio, target_bandwidth=1.5, device="cuda"):
     array = audio["array"]
@@ -54,12 +54,12 @@ def llama3_1_s_model_loader(self):
     ).to(self.device)
     self.vq_model.ensure_whisper(self.device)
 
-    self.llm_tokenizer           = AutoTokenizer.from_pretrained(llama_model_path)
+    self.llm_tokenizer           = AutoTokenizer.from_pretrained(self.model_name)
     self.llm_tokenizer.pad_token = self.llm_tokenizer.eos_token
-    self.llm_model               = AutoModelForCausalLM.from_pretrained(llama_model_path, torch_dtype=torch.bfloat16).to(self.device)
+    self.llm_model               = AutoModelForCausalLM.from_pretrained(self.model_name, torch_dtype=torch.bfloat16).to(self.device)
     self.llm_model.eval()
 
-    logging.info(f"Model loaded from {llama_model_path}.")
+    logging.info(f"Model loaded from {self.model_name}.")
 
 
 def llama3_1_s_model_generation(self, sample):
