@@ -50,14 +50,14 @@ def audio_to_sound_tokens(vq_model, audio, target_bandwidth=1.5, device="cuda"):
     result = ''.join(f'<|sound_{num:04d}|>' for num in codes)
     return f'<|sound_start|>{result}<|sound_end|>'
 def llama3_1_s_model_loader(self):
-    if not os.path.exists("whisper-vq-stoks-v3-7lang-fixed.model"):
+    if not os.path.exists("whisper-vq-stoks-medium-en+pl-fixed.model"):
         hf_hub_download(
             repo_id="jan-hq/WhisperVQ",
-            filename="whisper-vq-stoks-v3-7lang-fixed.model",
+            filename="whisper-vq-stoks-medium-en+pl-fixed.model",
             local_dir=".",
         )
     self.vq_model = RQBottleneckTransformer.load_model(
-        "whisper-vq-stoks-v3-7lang-fixed.model"
+        "whisper-vq-stoks-medium-en+pl-fixed.model"
     ).to(self.device)
     self.vq_model.ensure_whisper(self.device)
 

@@ -13,7 +13,7 @@ vector_quantize_pytorch
 webdataset
 librosa
 soundfile
-git+https://github.com/homebrewltd/WhisperSpeech.git
+whisperspeech
 --extra-index-url https://download.pytorch.org/whl/cu121
 torch==2.2.0
 torchaudio==2.2.0
